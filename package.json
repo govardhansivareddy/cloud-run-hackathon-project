@@ -1,0 +1,9 @@
+{
+  "name": "segretrack",
+  "version": "1.0.0",
+  "description": "SegreTrack - smart waste management for Cloud Run Hackathon",
+  "main": "app.js",
+  "scripts": { "start": "node app.js" },
+  "engines": { "node": ">=18" },
+  "dependencies": { "express": "^4.18.2" }
+}
