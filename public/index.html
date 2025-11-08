@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>SegreTrack Demo</title></head>
+<body>
+  <h1>SegreTrack — Demo</h1>
+  <input id="item" placeholder="e.g. plastic bottle" />
+  <button id="btn">Classify</button>
+  <p id="out"></p>
+  <script>
+    document.getElementById('btn').onclick = async () => {
+      const item = document.getElementById('item').value;
+      const res = await fetch('/api/classify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item })
+      });
+      const j = await res.json();
+      document.getElementById('out').innerText = JSON.stringify(j);
+    };
+  </script>
+</body>
+</html>
