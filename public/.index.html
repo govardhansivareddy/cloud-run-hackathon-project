@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>SegreTrack Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    input { padding: 8px; width: 300px; }
+    button { padding: 8px 12px; margin-left: 8px; }
+    pre { background:#f6f6f6; padding:12px; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <h1>SegreTrack — Demo</h1>
+  <p>Type an item (e.g. "plastic bottle", "banana peel") and click <b>Classify</b>.</p>
+
+  <input id="item" placeholder="e.g. plastic bottle" />
+  <button id="btn">Classify</button>
+
+  <h3>Result</h3>
+  <pre id="out">No result yet.</pre>
+
+  <script>
+    const btn = document.getElementById('btn');
+    const out = document.getElementById('out');
+    btn.onclick = async () => {
+      const item = document.getElementById('item').value || '';
+      try {
+        const res = await fetch('/api/classify', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ item })
+        });
+        const j = await res.json();
+        out.innerText = JSON.stringify(j, null, 2);
+      } catch (err) {
+        out.innerText = 'Error: ' + err.message;
+      }
+    };
+  </script>
+</body>
+</html>
